@@ -1,5 +1,11 @@
 {
-  "name": "src",
+  "name": "chem-cash",
+  "version": "2.0.0-alpha",
+  "author": {
+    "name": "Joseph W. May",
+    "email": "support@chem.cash",
+    "url": "https://chem.cash"
+  },
   "private": true,
   "type": "module",
   "scripts": {
