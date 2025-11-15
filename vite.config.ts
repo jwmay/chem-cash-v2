@@ -12,8 +12,8 @@ export default defineConfig({
     reactRouterDevTools(),
     reactRouter(),
     tsconfigPaths(),
-    netlifyReactRouter(),
-    netlify(),
+    // netlifyReactRouter(),
+    // netlify(),
   ],
 
   server: {
