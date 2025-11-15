@@ -1,3 +1,5 @@
+import netlify from '@netlify/vite-plugin'
+import netlifyReactRouter from '@netlify/vite-plugin-react-router'
 import tailwindcss from '@tailwindcss/vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { defineConfig } from 'vite'
@@ -10,6 +12,8 @@ export default defineConfig({
     reactRouterDevTools(),
     reactRouter(),
     tsconfigPaths(),
+    netlifyReactRouter(),
+    netlify(),
   ],
 
   server: {

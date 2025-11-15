@@ -27,6 +27,8 @@
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
+    "@netlify/vite-plugin": "^2.7.12",
+    "@netlify/vite-plugin-react-router": "^2.1.2",
     "@react-router/dev": "^7.9.6",
     "@tailwindcss/vite": "^4.1.17",
     "@types/node": "^22.19.1",
