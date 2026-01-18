@@ -1,13 +1,10 @@
 import React from 'react'
 import { Form } from 'react-router'
-import { supabase } from '../../supabaseClient'
+import { supabase } from '~/lib/supabase/client'
 
-import Icon from '~/components/ui/Icon'
-import { useAuthState } from '~/context/AuthContext'
+import Icon from '~/components/icon'
 
-import agent from '../../agent'
-
-export async function action({ request }: { request: Request }) {
+export async function clientAction({ request }: { request: Request }) {
   const data = await request.formData()
   console.log('Form Data Submitted:', data)
   return null
@@ -19,7 +16,7 @@ export async function clientLoader() {
     .select('*')
     .eq('id', '49daeb48-11ce-45a1-852d-c8942d26f0a9')
     .single()
-  // const data = await agent.StudentSettings.getOne()
+
   if (error) {
     console.error('Error loading student settings:', error)
     return { data: null, error }
@@ -53,10 +50,6 @@ function SettingsFieldset({
 }
 
 export default function StudentSettingsPage({ loaderData }: any) {
-  const { state } = useAuthState()
-  // const user_id = state.session?.user.id
-  // const settings = loaderData.data
-
   const [settings, setSettings] = React.useState<any>(loaderData.data)
 
   async function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -73,30 +66,12 @@ export default function StudentSettingsPage({ loaderData }: any) {
       ...settings,
       [name]: updatedValue,
     })
-    // Update the settings in the database
-    // await supabase
-    //   .from('StudentSettings')
-    //   .update({ [name]: updatedValue })
-    //   .eq('id', user_id)
-    //   .select()
-    //   .single()
-    //   .then((response) => {
-    //     if (response.error) {
-    //       console.error('Error updating settings:', response.error)
-    //     } else {
-    //       setSettings(response.data)
-    //       console.log('Settings updated successfully')
-    //       console.log(response.data)
-    //     }
-    //   })
   }
 
   return (
     <div className='drawer lg:drawer-open'>
       <input id='settings-sidebar' type='checkbox' className='drawer-toggle' />
       <div className='drawer-content pl-8'>
-        {/* Page content here */}
-        {/* <h1 className='mb-8 text-3xl'>Manage Account</h1> */}
         {loaderData.error && (
           <div className='alert alert-error mb-4 max-w-3xl mx-auto w-full py-8 flex flex-col gap-8'>
             <b>An error occurred while loading settings.</b>
@@ -174,14 +149,11 @@ export default function StudentSettingsPage({ loaderData }: any) {
                   <Icon className='opacity-50' name='key' />
                   <input
                     minLength={8}
-                    // name='password'
                     name='theme'
                     onChange={(event) => handleInputChange(event)}
-                    // pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
                     placeholder='New Password'
                     required
                     title='Must be more than 8 characters, including number, lowercase letter, uppercase letter'
-                    // type='password'
                     type='text'
                     value={settings?.theme || ''}
                   />
@@ -228,7 +200,6 @@ export default function StudentSettingsPage({ loaderData }: any) {
           className='drawer-overlay'
         ></label>
         <ul className='menu bg-base-300 rounded-box w-80 p-4'>
-          {/* Sidebar content here */}
           <h2 className='text-center uppercase text-lg font-bold'>Settings</h2>
           <li>
             <a href='#appearance'>
